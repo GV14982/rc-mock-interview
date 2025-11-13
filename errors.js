@@ -5,8 +5,8 @@ export class InvalidRestockKeyError extends Error {
    */
   constructor(key, cause) {
     super(`Invalid restock key: ${key}`, {
-      cause
-    })
+      cause,
+    });
   }
 }
 
@@ -17,8 +17,21 @@ export class InvalidItemError extends Error {
    */
   constructor(name, cause) {
     super(`Invalid item: ${name}`, {
-      cause
-    })
+      cause,
+    });
+  }
+}
+
+export class InvalidCostError extends Error {
+  /**
+   * @param {string} name - The item name provided
+   * @param {number} [cost] - The item name provided
+   * @param {unknown} [cause] - Error cause
+   */
+  constructor(name, cost, cause) {
+    super(`Restock invalid cost: ${name}: ${cost}`, {
+      cause,
+    });
   }
 }
 
@@ -29,8 +42,8 @@ export class InsufficientStockError extends Error {
    */
   constructor(name, cause) {
     super(`Insufficient stock for item: ${name}`, {
-      cause
-    })
+      cause,
+    });
   }
 }
 
@@ -42,8 +55,8 @@ export class InsufficientFundsError extends Error {
    */
   constructor(payment, cost, cause) {
     super(`Insufficient funds. Needed: ${cost}, recieved: ${payment}`, {
-      cause
-    })
+      cause,
+    });
   }
 }
 
@@ -54,8 +67,11 @@ export class InsufficientChangeError extends Error {
    * @param {unknown} [cause] - Error cause
    */
   constructor(change, missing, cause) {
-    super(`Insufficient change in bank. Needed: ${change}, missing: ${missing}`, {
-      cause
-    })
+    super(
+      `Insufficient change in bank. Needed: ${change}, missing: ${missing}`,
+      {
+        cause,
+      }
+    );
   }
 }

@@ -24,6 +24,7 @@ export class VendingMachine {
    */
   constructor(restockKey, initialInventory, initialBank) {
     throw new Error(`Unimplemented: ${getFunctionName()}`)
+
   }
 
   /**
