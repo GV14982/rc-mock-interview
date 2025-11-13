@@ -1,0 +1,13 @@
+{
+  "name": "rc-mock-interview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vendingMachine.js",
+  "scripts": {
+    "test": "node --test ./vending-machine.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
