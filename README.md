@@ -31,7 +31,7 @@ You will be implementing all currently unimplemented methods. These include:
       - The initial inventory for this instance of the class
     - `initialBank`
       - Optional
-      - The initial inventory for this instance of the class
+      - The initial change bank for this instance of the class
   - This should throw if the `restockKey` is empty
 - `inventory`
   - This is a public getter for reading the current available items and their cost

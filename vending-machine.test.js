@@ -7,30 +7,30 @@ import * as Types from "./types.js"
 const restockKey = "secretKey"
 
 /**
-  * @type {Types.InventoryItem[]}
+  * @type {Types.Inventory}
   */
-const initialInventory = [
-  {
+const initialInventory = {
+  "chips": {
     name: "chips",
     cost: 0.5,
     stock: 10
   },
-  {
+  "candy": {
     name: "candy",
     cost: 0.65,
     stock: 15
   },
-  {
+  "soda": {
     name: "soda",
     cost: 0.75,
     stock: 12
   },
-  {
+  "trail mix": {
     name: "trail mix",
     cost: 0.30,
     stock: 6,
   }
-];
+};
 
 /**
   * @type {Types.Bank}
@@ -69,14 +69,14 @@ describe("VendingMachine", () => {
       */
     let vm
     beforeEach(() => {
-      vm = new VendingMachine(restockKey, inventory, initialBank);
+      vm = new VendingMachine(restockKey, initialInventory, initialBank);
     })
 
     it("Should accept an initial inventory", () => {
-      assert.deepEqual(vm.inventory, inventory.reduce((acc, { name, cost }) => ({ ...acc, [name]: { name, cost } }), {}))
+      assert.deepEqual(vm.inventory, Object.values(initialInventory).reduce((acc, { name, cost }) => ({ ...acc, [name]: { name, cost } }), {}))
     })
     it("Should get current stock with valid key", () => {
-      assert.notDeepEqual(vm.getStock(restockKey), inventory.reduce((acc, curr) => ({ ...acc, [curr.name]: curr }), {}))
+      assert.notDeepEqual(vm.getStock(restockKey), initialInventory)
     })
     it("Should restock with valid key", () => {
       assert.doesNotThrow(() => {
@@ -103,7 +103,7 @@ describe("VendingMachine", () => {
       */
     let vm
     beforeEach(() => {
-      vm = new VendingMachine(restockKey, inventory, initialBank);
+      vm = new VendingMachine(restockKey, initialInventory, initialBank);
     })
     it("Should purchase valid item with exact change", () => {
       const change = vm.purchase("chips", 0.5)
@@ -119,7 +119,7 @@ describe("VendingMachine", () => {
       assert.equal(vm.getStock(restockKey)["candy"], 14)
       change = vm.purchase("candy", 1)
       assert.deepEqual(change, { quarters: 1, dimes: 1, nickles: 0, pennies: 0 })
-      assert.equal(vm.getStock(restockKey)["tail mix"], 5)
+      assert.equal(vm.getStock(restockKey)["trail mix"], 5)
       change = vm.purchase("soda", 0.80)
       assert.deepEqual(change, { quarters: 0, dimes: 0, nickles: 1, pennies: 0 })
       assert.equal(vm.getStock(restockKey)["soda"], 11)
@@ -133,7 +133,7 @@ describe("VendingMachine", () => {
         */
       let vm
       beforeEach(() => {
-        vm = new VendingMachine(restockKey, [...inventory, {
+        vm = new VendingMachine(restockKey, [...initialInventory, {
           name: "protein bar",
           cost: 1,
           stock: 1

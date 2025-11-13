@@ -15,11 +15,11 @@ export class VendingMachine {
     * @type {Types.Bank}
     * @private
     */
-  _bank = { penny: 0, nickle: 0, dime: 0, quarter: 0 }
+  _bank = { pennies: 0, nickles: 0, dimes: 0, quarters: 0 }
   /**
    * Create an instance of a Vending Machine
    * @param {string} restockKey - Key to use for restocking items (Think of this like the physical key a maintenance worker would use to open a vending machine)
-   * @param {Types.InventoryItem[]} [initialInventory] - Initial stock for the vending machine, defaults to nothing
+   * @param {Types.Inventory} [initialInventory] - Initial stock for the vending machine, defaults to nothing
    * @param {Types.Bank} [initialBank] - Initial bank used for making change
    */
   constructor(restockKey, initialInventory, initialBank) {
